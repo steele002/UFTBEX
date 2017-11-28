@@ -1,0 +1,92 @@
+<section data-ng-controller='list-ProjectsController'>
+  <div class="container-fluid">
+    <h2>Search for Textbooks</h2>
+    <div class="main row">
+    <!--<h3>Alternatively...</h3>-->
+    <div class="input-group input-group-lg" ng-init="search.minGrade='0';search.maxGrade = '912'">
+      <span class="input-group-addon" id="sizing-addon1">
+        <select style="height:25px" ng-model="myDropDown">
+                  <option value="">Select filter...</option>
+                  <option value="textbook">Textbook</option>
+                  <option value="author">Author</option>
+                  <option value="course">Course</option>
+                  <option value="instructor">Instructor</option>
+                  <option value="price">Price</option>
+
+        </select>
+      </span>
+        
+      <input ng-show="showHideFieldTextbook()" id="project" type="text" class="form-control" placeholder="Textbook" aria-describedby="sizing-addon1" ng-model= "search.searchName" 
+      ng-keypress = "enterPressName($event, search, show)">
+      <input ng-show="showHideFieldAuthor()" id="project" type="text" class="form-control" placeholder="Author" aria-describedby="sizing-addon1" ng-model= "search.searchAuthor" ng-keypress = "enterPressAuthor($event, search, show)">
+      <input ng-show="showHideFieldCourse()" id="project" type="text" class="form-control" placeholder="Course" aria-describedby="sizing-addon1" ng-model= "search.searchCourse" ng-keypress = "enterPressCourse($event, search, show)">
+      <input ng-show="showHideFieldInstructor()" id="project" type="text" class="form-control" placeholder="Instructor" aria-describedby="sizing-addon1" ng-model= "search.searchInstructor" ng-keypress = "enterPressInstructor($event, search, show)">
+      <input ng-show="showHideFieldPrice()" id="project" type="number" class="form-control" placeholder="Min" aria-describedby="sizing-addon1" ng-model= "search.minPrice" ng-keypress = "enterPressPrice($event, search, show)">
+      <input ng-show="showHideFieldPrice()" id="project" type="number" class="form-control" placeholder="Max" aria-describedby="sizing-addon1" ng-model= "search.maxPrice" ng-keypress = "enterPressPrice($event, search, show)">
+
+    </div>
+    <br>
+
+    <br>
+    <br>
+    <div class = "text-center"><button id="submit" type="submit" class="btn btn-warning btn-block" ng-click="show = true; find(search)" style="width:50%; margin-left:25%">Submit</button></div>
+    <br>
+    <div class="row" >
+
+            <!-- <h2 class="panel-title"> Search Results </h2></div> -->
+      <div class="card-deck" ng-show="show">
+          <div class="row">
+              <div class="col-md-6 col-md-offset-3" style="text-align:center">
+                    <h3 class="search-results">Search Results: </h3>
+              </div>
+          </div>
+
+          <div class="card col-sm-4" ng-repeat="prj in projects">
+                <!-- Displays all matching projects as a panel  -->
+                    <div class="listing">
+                      <img class="card-img-top" src={{prj.url}} alt="Card image cap">
+                    </div>
+                <div class="card-block" data-ui-sref="projects.view({projectId : prj._id})">
+                      <div class="card-title">
+                              <div>
+                                  <a id="link" data-ui-sref="projects.view({projectId : prj._id})">
+                                    <!-- Title is a hyperlink -->
+                                      <h4 class="gold" style="font-size:20">
+                                      {{prj.title}}</h4>
+                                  </a>
+                              </div>
+                              <div><h5>
+                                  Author: {{prj.author}}</h5></div>
+                              <div><h5>
+                                  Posted by <strong>{{prj.user.displayName}}</strong></h5></div>
+                              
+
+                      </div>
+                      <div class="card-text">
+                          <div class="row">
+                            <!-- Shows project summary as 2/3 of the panel width-->
+                              <div class="col-md-12">
+                                  <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <h4> Price: ${{prj.price}} </h4>
+                                            <div> Course: {{prj.course}}</div>
+                                            <div> Instructor: {{prj.instructor}}</div>
+                                        </div>
+                                  </div>
+                              </div>
+
+                          </div>
+
+
+
+
+                    </div>
+                </div>
+
+                
+          </div>
+    </div>
+  </div>
+  </div>
+  </div>
+</section>

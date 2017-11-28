@@ -1,0 +1,121 @@
+<section data-ng-controller="ProjectsController" data-ng-init="findOne()">
+    <div data-ng-show="project.user._id">
+        <div class="container" id="list" data-ng-show="project.status==='Active'&&project.isPublic||authentication.user._id===project.user._id">
+          
+
+          <div class="panel-heading">
+              <div style="font-size:2em; display: block;" class="sub-header">View Textbook Listing                       
+              </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="preview">
+                      <img src={{project.url}}>
+                    </div>
+                  </div>
+                  <div class="col-sm-8">
+                    <div>
+                        <h3>{{project.title}}</h4>
+                        <h4>{{project.author}}</h4>
+                        <u>Textbook Information</u>
+                        <div>ISBN: {{project.isbn}}</div>
+                        <div>Edition: {{project.edition}}</div>
+                        <div>Instructor: {{project.instructor}}</div>
+                        <div>Course: {{project.course}}</div>
+                        <div>Required: {{project.required}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Price</th>
+                        <th>Condition</th>
+                        <th>Location</th>
+                        <th>Contact</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{project.price}}</td>
+                        <td>{{project.condition}}</td>
+                        <td>{{project.location}}</td>
+                        <td><a ng-href="mailto:{{project.contactInformation}}">{{project.contactInformation}}</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+        <br>
+        <br>
+        <br>
+          
+            
+            
+            <!--div class = "row" data-ng-show="authentication.user._id && authentication.user._id !== project.user._id">
+                <div class="col-md-12">
+                    <h2>Rate this Project:
+                        <a href="#"><div class="{{glyphs[0]}}" style="font-size:1em" ng-mouseenter="rating_hover(1)"
+                            ng-mouseleave="reset_hover()" ng-click="rating = 1; rate()"> </div></a>
+                        <a href="#"><div class="{{glyphs[1]}}" style="font-size:1em" ng-mouseenter="rating_hover(2)"
+                            ng-mouseleave="reset_hover()" ng-click="rating = 2; rate()"> </div></a>
+                        <a href="#"><div class="{{glyphs[2]}}" style="font-size:1em" ng-mouseenter="rating_hover(3)"
+                            ng-mouseleave="reset_hover()" ng-click="rating = 3; rate()"> </div></a>
+                        
+                        <a href="#"><div class="{{glyphs[3]}}" style="font-size:1em" ng-mouseenter="rating_hover(4)"
+                            ng-mouseleave="reset_hover()" ng-click="rating = 4; rate()"> </div></a>
+                        
+                        <a href="#"><div class="{{glyphs[4]}}" style="font-size:1em" ng-mouseenter="rating_hover(5)"
+                            ng-mouseleave="reset_hover()" ng-click="rating = 5; rate()"> </div></a>
+                    </h2>
+                    <h4> {{getMyRating(authentication.user._id)}} </h4>
+                    <br>
+                    
+                </div-->
+            </div>
+            <div class="row" style="padding-bottom: 1%">
+                <div class="col-md-12">
+                    <div class="pull-right">
+                            <!--
+                            <a class="btn btn-success">
+                                Confirm
+                            </a>
+                          -->
+                            </div>
+                    <!--<div class="pull-right" data-ng-show="authentication.user._id === project.user._id">-->
+                        <div class="pull-right" data-ng-show="projectOwnership">
+                        <a id="edit" class="btn btn-primary" data-ui-sref="projects.edit({projectId: project._id})">
+                            Edit
+                        </a>
+                        <a id="delete" class="btn btn-danger" data-ng-click="remove()" data-ng-show="authentication.user._id === project.user._id">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 main">
+            <span data-ng-hide="project.status==='Active'&&project.isPublic||projectOwnership">
+                <div class="alert alert-success" role="alert">
+                    <p>Textbook Page Not Available.</p>
+                    <p><a data-ui-sref="home" class="alert-link">Click here to return to the home page</a></p>
+                    <p><a data-ui-sref="projects.list" class="alert-link">Click here to search for a textbook</a></p>
+                </div>
+            </span>
+        </div>
+    </div>
+    </div>
+    
+    <div style="padding-top: 25%" data-ng-hide="project.user._id">
+        <div style="display: flex;align-items: center; justify-content: center">
+            <div style="color: #64bed8" class="la-cube-transition">
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <h2 class="text-center">Loading</h2>
+    </div>
+</section>

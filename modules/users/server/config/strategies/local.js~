@@ -1,0 +1,17 @@
+'use strict';
+
+module.exports = {
+  db: {
+    uri: 'mongodb://ds051933.mongolab.com:51933/uftbex',
+    options: {
+      user: 'uftbexDatabase',
+      pass: 'uftbexformybizzle'
+    }
+  },
+
+  imageServer: {
+    key: 'AKIAIQIZVFFTPVUY66AQ',
+    secret: '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',
+    bucket: 'uftbexpictures'
+  }
+};
